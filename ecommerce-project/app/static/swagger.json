@@ -1,0 +1,117 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "E-commerce API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/items": {
+            "get": {
+                "summary": "Get all items",
+                "responses": {
+                    "200": {
+                        "description": "List of items"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new item",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Item object that needs to be added",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Item"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Item created"
+                    }
+                }
+            }
+        },
+         "/items/{item_id}": {
+          "get": {
+            "summary": "Get an item by ID",
+            "parameters": [
+               {
+                "name": "item_id",
+                "in": "path",
+                "description": "ID of the item to get",
+                "required": true,
+                "type": "integer",
+                "format": "int64"
+              }
+            ],
+             "responses": {
+              "200": {
+                  "description": "Item found"
+                  }
+              }
+           },
+           "put": {
+             "summary": "Update an item by ID",
+             "parameters": [
+                {
+                   "name": "item_id",
+                   "in": "path",
+                   "description": "ID of the item to update",
+                   "required": true,
+                   "type": "integer",
+                   "format": "int64"
+                  },
+                  {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Item object that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Item"
+                        }
+                    }
+             ],
+             "responses": {
+                 "200": {
+                   "description": "Item updated"
+                 }
+             }
+            },
+            "delete": {
+              "summary": "Delete an item by ID",
+              "parameters": [
+                {
+                  "name": "item_id",
+                  "in": "path",
+                  "description": "ID of the item to delete",
+                  "required": true,
+                  "type": "integer",
+                  "format": "int64"
+                }
+              ],
+              "responses": {
+                "204": {
+                    "description": "Item deleted"
+                  }
+                }
+               }
+           }
+    },
+    "definitions": {
+      "Item": {
+          "type": "object",
+          "properties": {
+              "name": {
+                  "type": "string"
+              },
+              "price": {
+                  "type": "number",
+                   "format": "double"
+              }
+          }
+      }
+    }
+  }
